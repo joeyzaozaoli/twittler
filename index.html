@@ -6,50 +6,57 @@
   </head>
   <body>
     <h2>Twittler</h2>
-    <button>New Tweets</button>
-    <p class="all"></p>
+    <button>All Tweets</button>
+    <div></div>
+
     <script>
-      var $all = $('.all');
-
       var showAll = function() {
-        $all.html('');
-
+        $('div').html('');
         var index = streams.home.length - 1;
+
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + tweet.created_at);
-          $tweet.appendTo($all);
+          var $tweet = $(
+            '<p>' 
+          +   '<span class="user"></span>'
+          +   '<span class="message"></span>'
+          +   '<span class="time"></span>'                
+          + '</p>'
+          );
+          $tweet.find('.user').text(tweet.user);
+          $tweet.find('.message').text(': ' + tweet.message);
+          $tweet.find('.time').text(tweet.time);
+          $tweet.appendTo($('div'));
           index -= 1;
         }
       };
 
-      var showFilter = function() {
-        $all.html('');
-        
-        var i = streams.users['douglascalhoun'].length - 1;
+      var showFilter = function(username) {
+        $('div').html('');
+        var i = streams.users[username].length - 1;
+
         while(i >= 0){
-          var tweet = streams.users['douglascalhoun'][i];
+          var tweet = streams.users[username][i];
           var $tweet = $('<h4></h4>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message + tweet.created_at);
-          $tweet.appendTo($all);
+          $tweet.appendTo($('div'));
           i -= 1;
         }
       };
 
       $(document).ready(function(){
         showAll();
-
+        
         $('button').on('click', function() {
           scheduleNextTweet();
           showAll();
         });
-
-        $('.all').on('click', 'div', function() {
-          showFilter();
+        
+        $('div').on('click', '.user', function() {
+          var username = $(this).text();
+          showFilter(username);
         });
       });
-
     </script>
   </body>
 </html>
