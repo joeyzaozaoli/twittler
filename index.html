@@ -63,7 +63,7 @@
 
     <script>
       var showAll = function() {
-        $('div').html('');
+        $('div').text('');
         var index = streams.home.length - 1;
 
         while(index >= 0){
@@ -84,11 +84,11 @@
       };
 
       var showFilter = function(username) {
-        $('div').html('');
-        var i = streams.users[username].length - 1;
+        $('div').text('');
+        var index = streams.users[username].length - 1;
 
-        while(i >= 0){
-          var tweet = streams.users[username][i];
+        while(index >= 0){
+          var tweet = streams.users[username][index];
           var $tweet = $(
             '<p>' 
           +   '<span class="user"></span>'
@@ -100,7 +100,7 @@
           $tweet.find('.message').text(tweet.message);
           $tweet.find('.time').text(tweet.created_at.toLocaleString());
           $tweet.appendTo($('div'));
-          i -= 1;
+          index -= 1;
         }
       };
 
@@ -110,7 +110,7 @@
         $('button').on('click', function() {
           scheduleNextTweet();
           showAll();
-          $('h3').html('');
+          $('h3').text('');
         });
         
         $('div').on('click', '.user', function() {
