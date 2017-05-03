@@ -25,7 +25,7 @@
         color: #6d6967;
       }
       .user {
-        font-size: 19px;
+        font-size: 19.5px;
         color: #5ea3ed;
         text-decoration: none;
       }
@@ -40,6 +40,7 @@
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
   </head>
+
   <body>
     <h1>Twittler</h1>
     <button>All Tweets</button>
@@ -54,7 +55,7 @@
           var tweet = streams.home[index];
           var $tweet = $(
             '<p>' 
-          +   '<a href="#"" class="user"></a>'
+          +   '<a href="#" class="user"></a>'
           +   '<span class="message"></span>'
           +   '<span class="time"></span>'                
           + '</p>'
@@ -73,8 +74,16 @@
 
         while(i >= 0){
           var tweet = streams.users[username][i];
-          var $tweet = $('<h4></h4>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + tweet.created_at);
+          var $tweet = $(
+            '<p>' 
+          +   '<span class="user"></span>'
+          +   '<span class="message"></span>'
+          +   '<span class="time"></span>'                
+          + '</p>'
+          );
+          $tweet.find('.user').text(tweet.user);
+          $tweet.find('.message').text(tweet.message);
+          $tweet.find('.time').text(tweet.created_at.toLocaleString());
           $tweet.appendTo($('div'));
           i -= 1;
         }
