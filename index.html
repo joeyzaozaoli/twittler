@@ -6,12 +6,20 @@
         background-color: #c9f2df;
         margin: 20px 0 0 60px;
       }
-      h1, button {
+      h1, button, h3 {
         font-family: Verdana;
         display: inline-block;
       }
-      h1 {
+      h1, h3 {
         color: #ff8e3d;
+      }
+      button, h3 {
+        margin-left: 50px;
+      }
+      h1 {
+        background-color: white;
+        padding: 3px;
+        border-radius: 5px 5px 5px 5px;
       }
       button {
         width: 100px;
@@ -21,7 +29,6 @@
         color: white;
         border-radius: 7px 7px 7px 7px;
         border: none;
-        margin-left: 50px;
         position: relative;
         bottom: 5px;
       }
@@ -51,6 +58,7 @@
   <body>
     <h1>Twittler</h1>
     <button>All Tweets</button>
+    <h3></h3>
     <div></div>
 
     <script>
@@ -102,11 +110,13 @@
         $('button').on('click', function() {
           scheduleNextTweet();
           showAll();
+          $('h3').html('');
         });
         
         $('div').on('click', '.user', function() {
           var username = $(this).text();
           showFilter(username);
+          $('h3').text(username);
         });
       });
     </script>
